@@ -11,3 +11,5 @@ Jamming is a React-based web application that allows users to search for songs a
 - View detailed information about queried songs (title, artist, album, etc.).
 - Export custom playlists to Spotify.
 - Responsive and user-friendly design.
+
+## Project Requirements

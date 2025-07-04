@@ -1,0 +1,26 @@
+.container{
+display: flex;
+justify-content: center;   /* horizontally center */
+  align-items: center;       /* vertically center */
+  padding-left: 5rem; 
+  margin-top: 2rem;               /* space between input and button */
+  
+}
+
+.playlistInput{
+    border-radius: 6px;
+    height: 2rem;
+}
+
+::placeholder{
+    text-align: center;
+}
+
+p{
+    padding-right: 4rem;
+}
+
+.playlistButton{
+  position: relative;
+  left: 2rem;
+}

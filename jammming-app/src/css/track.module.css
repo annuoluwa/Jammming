@@ -1,0 +1,33 @@
+.trackRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  color: white;
+}
+
+.trackRow:hover{
+    background-color: #bb86fc;
+}
+.trackInfo {
+  flex-grow: 1;
+}
+
+.trackButton {
+  margin-left: 1rem;
+  background-color: #bb86fc;
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.trackButton:hover {
+  background-color: #a455f7;
+}

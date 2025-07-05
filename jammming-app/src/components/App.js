@@ -62,6 +62,27 @@ function App() {
     checkAuth();
   }, []);
 
+
+  useEffect(() => {
+
+const savedName = localStorage.getItem('playlistName');
+if(savedName) {
+  setPlaylistName(savedName)
+}
+
+const savedSongs = localStorage.getItem('playlistSongs');
+ if (savedSongs) {
+    try {
+      const parsedSongs = JSON.parse(savedSongs);
+      if (Array.isArray(parsedSongs)) {
+        setPlaylistSongs(parsedSongs);
+      }
+    } catch (error) {
+      console.error("Failed to parse saved songs:", error);
+    }
+  }
+  }, []);
+
   const handleLogin = () => {
     redirectToAuthCodeFlow();
   };
@@ -76,15 +97,21 @@ function App() {
 
   const addTrack = (track) => {
     if (playlistSongs.find((saved) => saved.id === track.id)) return;
-    setPlaylistSongs([...playlistSongs, track]);
+    const updatePlaylist = [...playlistSongs, track];
+    setPlaylistSongs(updatePlaylist);
+    localStorage.setItem('playlistSongs', JSON.stringify(updatePlaylist));
+
   };
 
   const removeTrack = (track) => {
-    setPlaylistSongs(playlistSongs.filter((saved) => saved.id !== track.id));
+    const updatedTrack= playlistSongs.filter((saved) => saved.id !== track.id);
+    setPlaylistSongs(updatedTrack)
+    localStorage.setItem('playlistSongs', JSON.stringify(updatedTrack))
   };
 
   const updatePlaylistName = (name) => {
     setPlaylistName(name);
+    localStorage.setItem('playlistName', name)
   };
 
   const savePlaylist = () => {
@@ -92,7 +119,10 @@ function App() {
      savePlaylistToSpotify(playlistName, playlistSongs);
   setPlaylistName('');
   setPlaylistSongs([]);
+      localStorage.removeItem('playlistName');
+    localStorage.removeItem('playlistsongs');
     alert(`Saving playlist: ${playlistName} with ${playlistSongs.length} songs`);
+
   };
 
   if (loading) return <div>Loading...</div>;
@@ -110,6 +140,7 @@ function App() {
     <div className={styles.app} style={{ maxWidth: 800, margin: '2rem auto' }}>
 
       <Header />
+      <main className={styles.mainContent}>
       <SearchBar onSearch={handleSearch} />
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
         <div style={{ flex: 1, marginRight: '1rem' }}>
@@ -127,6 +158,7 @@ function App() {
           />
         </div>
       </div>
+      </main>
       <Footer />
     </div>
   );

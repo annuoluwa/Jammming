@@ -1,7 +1,15 @@
+.headContainer{
+    width: 100vw;
+    background-color: rgb(18, 18, 125, 0.5);
+    margin-top: -4rem;
+}
+
+
 .head{
 font-size: 3rem;
 color: white;
 text-align: center;
-margin-top:  -65px; 
-padding-bottom: 6rem;
+padding-bottom: 0.5rem;
+width: 100%;
+
 }

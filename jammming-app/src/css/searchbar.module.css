@@ -5,6 +5,7 @@
   align-items: center;       /* vertically center */
   gap: 10px;                 /* space between input and button */
   height: 100px; 
+  margin-top: 4rem;
 }
 
 

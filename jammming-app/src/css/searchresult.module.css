@@ -1,8 +1,11 @@
 .styleh2{
     text-align: left;
+    margin-bottom: 1rem;
+    
 }
 
 .container{
     min-height: 100vh;
     margin-top: 5rem;
+    padding: 0 2rem;
 }

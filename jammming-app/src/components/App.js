@@ -13,7 +13,7 @@ import { savePlaylistToSpotify } from './spotify';
 import styles from '../css/App.module.css';
 
 
-
+/*
 const sampleTracks = [ //demo tracks
   {
 name: 'Waymaker',
@@ -42,7 +42,7 @@ artist: 'Greatmantakit',
 id: 3,
 uri: "spotify:track:6rqhFgbbKwnb9MLmUQDhG8",
   }
-]
+] */
 
 
 function App() {

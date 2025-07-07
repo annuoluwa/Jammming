@@ -1,5 +1,13 @@
 const clientId = 'd92d63b0355c4454bd22269bce04c780';
-const redirectUri = 'http://127.0.0.1:3000';
+
+// List your local IP addresses here (replace with your actual local IP)
+const localIPs = ['127.0.0.1', '192.168.1.100']; // Add your real IP(s)
+const hostname = window.location.hostname;
+
+// Determine redirectUri dynamically
+const redirectUri = localIPs.includes(hostname)
+  ? `http://${hostname}:3000`  // local IP redirect URI, no trailing slash here to match your original
+  : 'https://jammm2music.netlify.app'; // production URI
 
 // Helper to generate random strings
 function generateRandomString(length) {
@@ -114,7 +122,6 @@ export async function handleAuthRedirect() {
     console.error('Token exchange failed:', data);
   }
 }
-
 // Search Spotify tracks using saved access token
 export async function searchTracks(term) {
   const token = localStorage.getItem('access_token');

@@ -1,0 +1,177 @@
+/* App.module.css */
+
+/* ROOT THEME VARIABLES  */
+:root {
+  --bg-color: #0D0D2B;       /* very dark navy */
+  --secondary-bg: #1A1A40;   /* slightly lighter dark containers */
+  --highlight-bg: #26264F;   /* panels, track lists */
+  --text-color: #E0E0FF;     /* light lavender */
+  --accent-color: #FF3F8B;   /* neon pink accent */
+  --accent-hover: #FF69A1;   /* hover brighter pink */
+  --border-color: #333366;   /* subtle border for separation */
+  --placeholder-color: #B3CFFF; /* placeholder text */
+  --button-radius: 0.4rem;
+  --transition-speed: 0.3s;
+  --font-family: 'Inter', sans-serif;
+}
+
+/* === GLOBAL STYLING === */
+.app {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+h1, h2, h3, h4 {
+  color: var(--text-color);
+}
+
+button {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--button-radius);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: var(--accent-hover);
+}
+
+button:disabled {
+  background-color: #555555;
+  cursor: not-allowed;
+}
+
+
+/*  HEADER AND FOOTER */
+header, footer {
+  background-color: var(--secondary-bg);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.head {
+  font-size: 3rem;
+  color: var(--text-color);
+  text-align: center;
+  padding-bottom: 0.5rem;
+  width: 100%;
+  font-weight: bold;
+}
+
+.accentText {
+  color: var(--accent-color);
+}
+
+
+header h1, footer p {
+  margin: 0;
+}
+
+/* === MAIN CONTENT === */
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* === SEARCH BAR === */
+.searchBar {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.searchBar input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: var(--button-radius);
+  border: 1px solid var(--border-color);
+  background-color: var(--secondary-bg);
+  color: var(--text-color);
+}
+
+.searchBar input::placeholder {
+  color: var(--placeholder-color);
+}
+
+/* === SEARCH RESULTS & PLAYLIST === */
+.trackList {
+  background-color: var(--highlight-bg);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.trackItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.trackItem:last-child {
+  border-bottom: none;
+}
+
+.trackItem button {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.9rem;
+}
+
+/* Playlist name input */
+.playlistNameInput {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: var(--button-radius);
+  border: 1px solid var(--border-color);
+  background-color: var(--secondary-bg);
+  color: var(--text-color);
+}
+
+/* === RESPONSIVENESS === */
+@media (max-width: 768px) {
+  .mainContent > div {
+    flex-direction: column;
+  }
+
+  .trackList {
+    max-height: 300px;
+  }
+
+  .trackItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 0.5rem;
+  }
+
+  .searchBar {
+    flex-direction: column;
+  }
+
+  .searchBar input {
+    width: 100%;
+  }
+}

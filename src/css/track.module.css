@@ -1,0 +1,35 @@
+.trackRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(224, 224, 255, 0.05);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  color: var(--text-color);
+  transition: background-color 0.2s ease;
+}
+
+.trackRow:hover {
+  background-color: var(--accent-color);
+}
+
+.trackInfo {
+  flex-grow: 1;
+}
+
+.trackButton {
+  margin-left: 1rem;
+  background-color: var(--accent-color);
+  border: none;
+  color: var(--bg-color);
+  font-size: 1.25rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--button-radius);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.trackButton:hover {
+  background-color: var(--accent-hover);
+}

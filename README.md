@@ -15,8 +15,8 @@ Jamming is a React-based web application that allows users to search for songs a
 ## Project Requirements
  - CSS Modules - For component-scoped styling.
  - JSX - For writing UI components in React
- -  JavaScript(ES6+) -For application logiv and interactivity
- -  React - For bulding and managing the app's uder interface.
+ -  JavaScript(ES6+) -For application login and interactivity
+ -  React - For building and managing the app's user interface.
 
  ## Getting Started
 
@@ -33,4 +33,4 @@ Jamming is a React-based web application that allows users to search for songs a
  - **JavaScript(ES6+)** - Core language for app logic
  - **JSX** - Syntax extension used with React to describe UI.
  - **CSS Modules** - For scoped and modular CSS styling.
- - **Spotify Web API** - To search track and manage playlists.    
+ - **Spotify Web API** - To search, track and manage playlists.    

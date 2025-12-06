@@ -99,13 +99,16 @@ const savedSongs = localStorage.getItem('playlistSongs');
   if (loading) return <div>Loading...</div>;
 
   if (!loggedIn) {
-    return (
-      <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-        <h1>Welcome to My Jammming App</h1>
-        <button onClick={handleLogin}>Login with Spotify</button>
-      </div>
-    );
-  }
+  return (
+    <div className={styles.loginContainer}>
+      <h1 className={styles.loginTitle}>Welcome to Jammming </h1>
+
+      <button className={styles.loginButton} onClick={handleLogin}>
+        Login with Spotify
+      </button>
+    </div>
+  );
+}
 
   return (
     <div className={styles.app} style={{ maxWidth: 800, margin: '2rem auto' }}>

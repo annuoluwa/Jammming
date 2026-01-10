@@ -115,7 +115,7 @@ function App() {
   return (
     <div className={styles.app}>
       <Header />
-      <button style={{position: 'absolute', top: 16, right: 16, zIndex: 1000}} onClick={handleLogout}>Logout</button>
+      <button className={styles.logoutButton} onClick={handleLogout}>Logout</button>
       <main className={styles.mainContent}>
         <SearchBar onSearch={handleSearch} />
         <div className={styles.columns}>

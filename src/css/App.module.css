@@ -20,7 +20,6 @@
   --max-width: 900px;
 }
 
-/* APP WRAPPER */
 .app {
   background-color: var(--bg);
   color: var(--text);
@@ -28,7 +27,6 @@
   padding: 1rem;
 }
 
-/* MAIN */
 .mainContent {
   max-width: var(--max-width);
   margin: 2rem auto;
@@ -37,7 +35,6 @@
   gap: 1rem;
 }
 
-/* HEADER / FOOTER CONTAINERS (if header/footer elements exist) */
 header,
 footer {
   background-color: var(--surface);
@@ -48,7 +45,6 @@ footer {
   text-align: center;
 }
 
-/* OPTIONAL HEADER TEXT STYLES */
 .head {
   font-size: 3rem;
   font-weight: 800;
@@ -60,7 +56,6 @@ footer {
   color: var(--accent);
 }
 
-/* SEARCH BAR */
 .searchBar {
   display: flex;
   gap: 0.75rem;
@@ -87,7 +82,6 @@ footer {
   box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.18);
 }
 
-/* BUTTONS */
 button {
   background-color: var(--accent);
   color: #000;
@@ -114,7 +108,6 @@ button:disabled {
   transform: none;
 }
 
-/* TWO-COLUMN LAYOUT */
 .columns {
   display: flex;
   gap: 1rem;
@@ -126,7 +119,6 @@ button:disabled {
   min-width: 0;
 }
 
-/* PANEL CARD */
 .panel {
   background-color: var(--surface);
   border: 1px solid var(--border);
@@ -135,7 +127,6 @@ button:disabled {
   box-shadow: var(--shadow);
 }
 
-/* TITLES */
 .playlistTitle {
   text-align: center;
   font-size: 1.2rem;
@@ -144,7 +135,6 @@ button:disabled {
   font-weight: 700;
 }
 
-/* TRACK LIST (used by SearchResult if it applies these classes) */
 .trackList {
   max-height: 420px;
   overflow-y: auto;
@@ -183,7 +173,6 @@ button:disabled {
   border-radius: var(--radius-pill);
 }
 
-/* LOGIN */
 .loginContainer {
   min-height: 100vh;
   display: grid;
@@ -216,7 +205,28 @@ button:disabled {
   border-radius: var(--radius-pill);
 }
 
-/* RESPONSIVENESS */
+.logoutButton {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: none;
+}
+
+.logoutButton:active {
+  transform: none;
+}
+
 @media (max-width: 768px) {
   .mainContent {
     margin: 1.25rem auto;
@@ -257,5 +267,10 @@ button:disabled {
   .loginTitle {
     font-size: 1.9rem;
   }
-}
 
+  .logoutButton {
+    width: 140px;
+    padding: 0.45rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}

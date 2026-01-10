@@ -1,0 +1,39 @@
+/* searchresult.module.css */
+
+.container {
+  width: 100%;
+}
+
+.styleh2 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+  text-align: left;
+}
+
+.emptyResult {
+  width: 100%;
+  padding: 1.25rem 1rem;
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  text-align: center;
+  color: #b3b3b3;
+}
+
+.searchResultContainer {
+  width: 100%;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .styleh2 {
+    text-align: center;
+  }
+
+  .emptyResult {
+    padding: 1rem 0.85rem;
+  }
+}

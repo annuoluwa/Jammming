@@ -1,0 +1,33 @@
+.spinnerContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  background: rgba(18,18,18,0.02); /* subtle overlay */
+}
+
+.spinnerIcon {
+  width: 64px;
+  height: 64px;
+  animation: spin3d 1s cubic-bezier(0.4, 0.2, 0.2, 1) infinite;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.18));
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+@keyframes spin3d {
+  0% {
+    transform: rotateY(0deg) scale(1);
+  }
+  50% {
+    transform: rotateY(180deg) scale(1.08);
+  }
+  100% {
+    transform: rotateY(360deg) scale(1);
+  }
+}

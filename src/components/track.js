@@ -10,7 +10,7 @@ function Tracks({ track, onAdd, onRemove }) {
       <p>{track.artist}</p>
       </div>
       {onAdd && <button onClick={() => onAdd(track)} className={styles.trackButton}>+</button>}
-      {onRemove && <button onClick={() => onRemove(track)}>-</button>}
+      {onRemove && <button onClick={() => onRemove(track)} className={styles.removeButton}>-</button>}
       
     </div>
   );

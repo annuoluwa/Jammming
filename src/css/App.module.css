@@ -1,124 +1,176 @@
 /* App.module.css */
 
-/* ROOT THEME VARIABLES  */
 :root {
-  --bg-color: #0D0D2B;       /* very dark navy */
-  --secondary-bg: #1A1A40;   /* slightly lighter dark containers */
-  --highlight-bg: #26264F;   /* panels, track lists */
-  --text-color: #E0E0FF;     /* light lavender */
-  --accent-color: #FF3F8B;   /* neon pink accent */
-  --accent-hover: #FF69A1;   /* hover brighter pink */
-  --border-color: #333366;   /* subtle border for separation */
-  --placeholder-color: #B3CFFF; /* placeholder text */
-  --button-radius: 0.4rem;
-  --transition-speed: 0.3s;
-  --font-family: 'Inter', sans-serif;
+  --bg: #121212;
+  --surface: #1a1a1a;
+  --surface-2: #2a2a2a;
+  --text: #ffffff;
+  --text-muted: #b3b3b3;
+  --border: rgba(255, 255, 255, 0.08);
+
+  --accent: #1db954;
+  --accent-hover: #1ed760;
+
+  --radius: 12px;
+  --radius-pill: 999px;
+
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  --shadow-soft: 0 6px 16px rgba(0, 0, 0, 0.25);
+
+  --max-width: 900px;
 }
 
-/* === GLOBAL STYLING === */
+/* APP WRAPPER */
 .app {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: var(--font-family);
+  background-color: var(--bg);
+  color: var(--text);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   padding: 1rem;
 }
 
-h1, h2, h3, h4 {
-  color: var(--text-color);
-}
-
-button {
-  background-color: var(--accent-color);
-  color: var(--bg-color);
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: var(--button-radius);
-  cursor: pointer;
-  transition: all var(--transition-speed) ease;
-  font-weight: bold;
-}
-
-button:hover {
-  background-color: var(--accent-hover);
-}
-
-button:disabled {
-  background-color: #555555;
-  cursor: not-allowed;
-}
-
-
-/*  HEADER AND FOOTER */
-header, footer {
-  background-color: var(--secondary-bg);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  text-align: center;
-}
-
-.head {
-  font-size: 3rem;
-  color: var(--text-color);
-  text-align: center;
-  padding-bottom: 0.5rem;
-  width: 100%;
-  font-weight: bold;
-}
-
-.accentText {
-  color: var(--accent-color);
-}
-
-
-header h1, footer p {
-  margin: 0;
-}
-
-/* === MAIN CONTENT === */
+/* MAIN */
 .mainContent {
-  flex: 1;
+  max-width: var(--max-width);
+  margin: 2rem auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-/* === SEARCH BAR === */
+/* HEADER / FOOTER CONTAINERS (if header/footer elements exist) */
+header,
+footer {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+/* OPTIONAL HEADER TEXT STYLES */
+.head {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.accentText {
+  color: var(--accent);
+}
+
+/* SEARCH BAR */
 .searchBar {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
   width: 100%;
 }
 
 .searchBar input {
   flex: 1;
-  padding: 0.5rem 1rem;
-  border-radius: var(--button-radius);
-  border: 1px solid var(--border-color);
-  background-color: var(--secondary-bg);
-  color: var(--text-color);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background-color: var(--surface-2);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .searchBar input::placeholder {
-  color: var(--placeholder-color);
+  color: var(--text-muted);
 }
 
-/* === SEARCH RESULTS & PLAYLIST === */
+.searchBar input:focus {
+  border-color: rgba(29, 185, 84, 0.6);
+  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.18);
+}
+
+/* BUTTONS */
+button {
+  background-color: var(--accent);
+  color: #000;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  background-color: #3a3a3a;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* TWO-COLUMN LAYOUT */
+.columns {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.column {
+  flex: 1;
+  min-width: 0;
+}
+
+/* PANEL CARD */
+.panel {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+/* TITLES */
+.playlistTitle {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: 0.4px;
+  font-weight: 700;
+}
+
+/* TRACK LIST (used by SearchResult if it applies these classes) */
 .trackList {
-  background-color: var(--highlight-bg);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  max-height: 500px;
+  max-height: 420px;
   overflow-y: auto;
+}
+
+.trackList::-webkit-scrollbar {
+  width: 10px;
+}
+
+.trackList::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+}
+
+.trackList::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
 }
 
 .trackItem {
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-color);
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
 }
 
 .trackItem:last-child {
@@ -126,67 +178,62 @@ header h1, footer p {
 }
 
 .trackItem button {
-  padding: 0.3rem 0.6rem;
+  padding: 0.45rem 0.85rem;
   font-size: 0.9rem;
+  border-radius: var(--radius-pill);
 }
 
-/* Playlist name input */
-.playlistNameInput {
-  width: 100%;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  border-radius: var(--button-radius);
-  border: 1px solid var(--border-color);
-  background-color: var(--secondary-bg);
-  color: var(--text-color);
-}
-
+/* LOGIN */
 .loginContainer {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background-color: var(--bg);
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 520px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow);
   text-align: center;
-  margin-top: 16rem;
-  color: var(--text-color);
-  font-family: 'Inter', sans-serif;
 }
 
 .loginTitle {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 2.25rem;
+  margin: 0 0 1.25rem 0;
+  font-weight: 800;
+  letter-spacing: 0.2px;
 }
 
 .loginButton {
-  background-color: var(--accent-color);
-  color: var(--text-color);
-  border: none;
-  padding: 0.9rem 2rem;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor:3pointer;
-  transition: background-color 0.25s ease, transform 0.15s ease;
+  width: 100%;
+  padding: 0.9rem 1.25rem;
+  border-radius: var(--radius-pill);
 }
 
-.loginButton:hover {
-  background-color: var(--accent-hover);
-  transform: translateY(-2px);
-}
-
-
-
-
-/* === RESPONSIVENESS === */
+/* RESPONSIVENESS */
 @media (max-width: 768px) {
-  .mainContent > div {
+  .mainContent {
+    margin: 1.25rem auto;
+    padding: 0 0.25rem;
+  }
+
+  .columns {
     flex-direction: column;
   }
 
   .trackList {
-    max-height: 300px;
+    max-height: 320px;
   }
 
   .trackItem {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.3rem;
   }
 
   button {
@@ -196,14 +243,19 @@ header h1, footer p {
 
 @media (max-width: 480px) {
   .app {
-    padding: 0.5rem;
+    padding: 0.75rem;
   }
 
   .searchBar {
     flex-direction: column;
   }
 
-  .searchBar input {
-    width: 100%;
+  .head {
+    font-size: 2.25rem;
+  }
+
+  .loginTitle {
+    font-size: 1.9rem;
   }
 }
+

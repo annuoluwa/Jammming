@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import Spinner from './Spinner';
 import SearchResult from './searchresult';
 import SearchBar from './searchbar';
 import Playlist from './playlist';
@@ -12,10 +13,6 @@ import Footer from './footer';
 import { savePlaylistToSpotify } from './spotify';
 import styles from '../css/App.module.css';
 
-
-
-
-
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -28,30 +25,28 @@ function App() {
       await handleAuthRedirect();
       const token = localStorage.getItem('access_token');
       setLoggedIn(!!token);
-      setLoading(false);
+      setTimeout(() => setLoading(false), 1200); // 1.2s simulated delay
     }
     checkAuth();
   }, []);
 
-
   useEffect(() => {
-
-const savedName = localStorage.getItem('playlistName');
-if(savedName) {
-  setPlaylistName(savedName)
-}
-
-const savedSongs = localStorage.getItem('playlistSongs');
- if (savedSongs) {
-    try {
-      const parsedSongs = JSON.parse(savedSongs);
-      if (Array.isArray(parsedSongs)) {
-        setPlaylistSongs(parsedSongs);
-      }
-    } catch (error) {
-      console.error("Failed to parse saved songs:", error);
+    const savedName = localStorage.getItem('playlistName');
+    if (savedName) {
+      setPlaylistName(savedName);
     }
-  }
+
+    const savedSongs = localStorage.getItem('playlistSongs');
+    if (savedSongs) {
+      try {
+        const parsedSongs = JSON.parse(savedSongs);
+        if (Array.isArray(parsedSongs)) {
+          setPlaylistSongs(parsedSongs);
+        }
+      } catch (error) {
+        console.error("Failed to parse saved songs:", error);
+      }
+    }
   }, []);
 
   const handleLogin = () => {
@@ -63,7 +58,7 @@ const savedSongs = localStorage.getItem('playlistSongs');
     setLoading(true);
     const results = await searchTracks(term);
     setSearchResults(results);
-    setLoading(false);
+    setTimeout(() => setLoading(false), 1200); // 1.2s simulated delay
   };
 
   const addTrack = (track) => {
@@ -71,68 +66,71 @@ const savedSongs = localStorage.getItem('playlistSongs');
     const updatePlaylist = [...playlistSongs, track];
     setPlaylistSongs(updatePlaylist);
     localStorage.setItem('playlistSongs', JSON.stringify(updatePlaylist));
-
   };
 
   const removeTrack = (track) => {
-    const updatedTrack= playlistSongs.filter((saved) => saved.id !== track.id);
-    setPlaylistSongs(updatedTrack)
-    localStorage.setItem('playlistSongs', JSON.stringify(updatedTrack))
+    const updatedTrack = playlistSongs.filter((saved) => saved.id !== track.id);
+    setPlaylistSongs(updatedTrack);
+    localStorage.setItem('playlistSongs', JSON.stringify(updatedTrack));
   };
 
   const updatePlaylistName = (name) => {
     setPlaylistName(name);
-    localStorage.setItem('playlistName', name)
+    localStorage.setItem('playlistName', name);
   };
 
   const savePlaylist = () => {
-    // Implement playlist saving to Spotify here
-     savePlaylistToSpotify(playlistName, playlistSongs);
-  setPlaylistName('');
-  setPlaylistSongs([]);
-      localStorage.removeItem('playlistName');
+    // Implement playlist saving to Spotify
+    savePlaylistToSpotify(playlistName, playlistSongs);
+    setPlaylistName('');
+    setPlaylistSongs([]);
+    localStorage.removeItem('playlistName');
     localStorage.removeItem('playlistsongs');
     alert(`Saving playlist: ${playlistName} with ${playlistSongs.length} songs`);
-
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Spinner />;
 
   if (!loggedIn) {
-  return (
-    <div className={styles.loginContainer}>
-      <h1 className={styles.loginTitle}>Welcome to Jammming </h1>
+    return (
+      <div className={styles.loginContainer}>
+        <div className={styles.loginCard}>
+          <h1 className={styles.loginTitle}>Welcome to Jammming </h1>
 
-      <button className={styles.loginButton} onClick={handleLogin}>
-        Login with Spotify
-      </button>
-    </div>
-  );
-}
-
-  return (
-    <div className={styles.app} style={{ maxWidth: 800, margin: '2rem auto' }}>
-
-      <Header />
-      <main className={styles.mainContent}>
-      <SearchBar onSearch={handleSearch} />
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
-        <div style={{ flex: 1, marginRight: '1rem' }}>
-          <SearchResult tracks={searchResults} onAdd={addTrack} />
-        </div>
-        <div style={{ flex: 1, marginLeft: '1rem' }}>
-          <h2>Playlist</h2>
-          <Playlist
-
-            name={playlistName}
-            playlistSongs={playlistSongs}
-            onNameChange={updatePlaylistName}
-            onRemove={removeTrack}
-            onSave={savePlaylist}
-          />
+          <button className={styles.loginButton} onClick={handleLogin}>
+            Login with Spotify
+          </button>
         </div>
       </div>
+    );
+  }
+
+  return (
+    <div className={styles.app}>
+      <Header />
+
+      <main className={styles.mainContent}>
+        <SearchBar onSearch={handleSearch} />
+
+        <div className={styles.columns}>
+          <div className={`${styles.column} ${styles.panel}`}>
+            <SearchResult tracks={searchResults} onAdd={addTrack} />
+          </div>
+
+          <div className={`${styles.column} ${styles.panel}`}>
+            <h2 className={styles.playlistTitle}>Playlist</h2>
+
+            <Playlist
+              name={playlistName}
+              playlistSongs={playlistSongs}
+              onNameChange={updatePlaylistName}
+              onRemove={removeTrack}
+              onSave={savePlaylist}
+            />
+          </div>
+        </div>
       </main>
+
       <Footer />
     </div>
   );

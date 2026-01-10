@@ -1,13 +1,11 @@
-const clientId = 'd92d63b0355c4454bd22269bce04c780';
+const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 
-// local IP addresses
-const localIPs = ['127.0.0.1', '192.168.1.100']; // Add your real IP(s)
+// Determine redirectUri based on environment
 const hostname = window.location.hostname;
-
-// Determine redirectUri dynamically
-const redirectUri = localIPs.includes(hostname)
-  ? `http://${hostname}:3000`  // local IP redirect URI, no trailing slash here to match your original
-  : 'https://jammm2music.netlify.app'; // production URI
+const isDev = hostname === '127.0.0.1' || hostname === 'localhost';
+const redirectUri = isDev
+  ? 'http://127.0.0.1:3000'
+  : 'https://jamming.elizabethosunsanwo.co.uk';
 
 // Helper to generate random strings
 function generateRandomString(length) {
@@ -35,7 +33,7 @@ async function generateCodeChallenge(codeVerifier) {
 
 const scope = 'playlist-modify-public playlist-modify-private user-read-private';
 
-// Called only when user clicks login
+// Initiates the Spotify authorization code flow
 export async function redirectToAuthCodeFlow() {
   const codeVerifier = generateRandomString(128);
   const codeChallenge = await generateCodeChallenge(codeVerifier);
@@ -57,7 +55,7 @@ export async function redirectToAuthCodeFlow() {
   window.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
 
-// Exchange authorization code for access token
+// Exchanges authorization code for access token
 async function exchangeCodeForToken(code, codeVerifier) {
   const body = new URLSearchParams({
     grant_type: 'authorization_code',
@@ -77,7 +75,7 @@ async function exchangeCodeForToken(code, codeVerifier) {
   return data;
 }
 
-// Called once on app load to handle Spotify redirect and get token
+// Handles Spotify redirect and retrieves access token
 export async function handleAuthRedirect() {
   const queryParams = new URLSearchParams(window.location.search);
   const code = queryParams.get('code');
@@ -122,7 +120,7 @@ export async function handleAuthRedirect() {
     console.error('Token exchange failed:', data);
   }
 }
-// Search Spotify tracks using saved access token
+// Searches Spotify tracks using saved access token
 export async function searchTracks(term) {
   const token = localStorage.getItem('access_token');
   const expirationTime = localStorage.getItem('token_expiration_time');
@@ -158,7 +156,7 @@ export async function searchTracks(term) {
 }
 
 
-// Get the current Spotify user's ID
+// Gets the current Spotify user's ID
 async function getCurrentUserId() {
   const token = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/me', {
@@ -173,7 +171,7 @@ async function getCurrentUserId() {
   return data.id;  // This is the Spotify user ID
 }
 
-// Create a new playlist with the specified name for the user
+// Creates a new playlist with the specified name
 async function createPlaylist(userId, playlistName) {
   const token = localStorage.getItem('access_token');
   const response = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
@@ -197,7 +195,7 @@ async function createPlaylist(userId, playlistName) {
   return data.id;  // The new playlist ID
 }
 
-// Add tracks (URIs) to a playlist
+// Adds tracks (URIs) to a playlist
 async function addTracksToPlaylist(playlistId, trackUris) {
   const token = localStorage.getItem('access_token');
   const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
@@ -218,7 +216,7 @@ async function addTracksToPlaylist(playlistId, trackUris) {
   return await response.json();
 }
 
-// The main function to save playlist with name and tracks
+// Saves playlist with name and tracks
 export async function savePlaylistToSpotify(playlistName, tracks) {
   if (!playlistName) {
     alert('Please enter a playlist name.');

@@ -2,34 +2,98 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(224, 224, 255, 0.05);
+  gap: 0.75rem;
+  background-color: #1a1a1a;
   padding: 0.75rem 1rem;
   margin-bottom: 0.5rem;
-  border-radius: 8px;
-  color: var(--text-color);
-  transition: background-color 0.2s ease;
+  border-radius: 10px;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .trackRow:hover {
-  background-color: var(--accent-color);
+  background-color: #202020;
+  transform: translateY(-1px);
 }
 
 .trackInfo {
-  flex-grow: 1;
+  flex: 1;
+  min-width: 0;
 }
 
+.trackInfo h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.trackInfo p {
+  margin: 0.15rem 0 0 0;
+  font-size: 0.85rem;
+  color: #b3b3b3;
+}
+
+/* Buttons */
 .trackButton {
-  margin-left: 1rem;
-  background-color: var(--accent-color);
+  background-color: #1db954;
   border: none;
-  color: var(--bg-color);
-  font-size: 1.25rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: var(--button-radius);
+  color: #000;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .trackButton:hover {
-  background-color: var(--accent-hover);
+  background-color: #1ed760;
+  transform: scale(1.05);
+}
+
+/* Remove button (same shape, neutral color) */
+.removeButton {
+  background-color: #2a2a2a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.removeButton:hover {
+  background-color: #3a3a3a;
+  transform: scale(1.05);
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .trackRow {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .trackInfo {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .trackActions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  .trackButton,
+  .removeButton {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.6rem;
+  }
 }

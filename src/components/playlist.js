@@ -9,7 +9,7 @@ function Playlist({ name, playlistSongs, onNameChange, onRemove, onSave }) {
 
   return (
     <div className={styles.container}>
-    <section className="playlist">
+    <section className={styles.playlist}>
       <input 
         value={name} 
         onChange={handleChange} 

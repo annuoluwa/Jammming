@@ -1,26 +1,116 @@
-.container{
-display: flex;
-justify-content: center;   
-  align-items: center;   
-  padding-left: 5rem; 
-  margin-top: 2rem;           
-  
+
+/* Main wrapper */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 2rem clamp(1rem, 5vw, 3rem);
+  margin-top: 2rem;
+  box-sizing: border-box;
 }
 
-.playlistInput{
-    border-radius: 6px;
-    height: 2rem;
+
+/* Playlist card */
+.playlist {
+  width: 100%;
+  max-width: 420px;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-::placeholder{
-    text-align: center;
+/* Playlist name input */
+.playlistInput {
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 8px;
+  border: none;
+  padding: 0 0.75rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background-color: #2a2a2a;
+  color: #fff;
 }
 
-p{
-    padding-right: 4rem;
+.playlistInput:focus {
+  outline: 2px solid #1db954; /* Spotify green */
 }
 
-.playlistButton{
-  position: relative;
-  left: 2rem;
+/* Placeholder */
+.playlistInput::placeholder {
+  text-align: center;
+  color: #aaa;
+}
+
+/* Empty playlist text */
+.playlist p {
+  text-align: center;
+  color: #bbb;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+
+/* Save button */
+.playlistButton {
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  border-radius: 20px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #1db954;
+  color: #000;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.playlistButton:hover {
+  background-color: #1ed760;
+  transform: translateY(-1px);
+}
+
+.playlistButton:active {
+  transform: scale(0.98);
+}
+
+/*  Responsive Styles */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .playlist {
+    max-width: 100%;
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .playlistInput {
+    height: 2.25rem;
+    font-size: 0.9rem;
+  }
+
+  .playlistButton {
+    font-size: 0.95rem;
+    padding: 0.65rem;
+  }
+
+  @media (max-width: 600px) {
+  .playlist {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 1.25rem; 
+    border-radius: 12px;
+    box-sizing: border-box;
+    letter-spacing: 0.25rem;
+    line-height: 1rem;
+  }
+}
 }

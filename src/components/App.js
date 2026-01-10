@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Spinner from './Spinner';
 import SearchResult from './searchresult';
@@ -12,6 +13,12 @@ import Header from './header';
 import Footer from './footer';
 import { savePlaylistToSpotify } from './spotify';
 import styles from '../css/App.module.css';
+
+// Logout handler
+const handleLogout = () => {
+  localStorage.removeItem('access_token');
+  window.location.reload();
+};
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -108,18 +115,15 @@ function App() {
   return (
     <div className={styles.app}>
       <Header />
-
+      <button style={{position: 'absolute', top: 16, right: 16, zIndex: 1000}} onClick={handleLogout}>Logout</button>
       <main className={styles.mainContent}>
         <SearchBar onSearch={handleSearch} />
-
         <div className={styles.columns}>
           <div className={`${styles.column} ${styles.panel}`}>
             <SearchResult tracks={searchResults} onAdd={addTrack} />
           </div>
-
           <div className={`${styles.column} ${styles.panel}`}>
             <h2 className={styles.playlistTitle}>Playlist</h2>
-
             <Playlist
               name={playlistName}
               playlistSongs={playlistSongs}
@@ -130,7 +134,6 @@ function App() {
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   );
